@@ -1,10 +1,10 @@
 import os
+import re
 
-suffix = 'pptx'
-new_name_prefix = 'CSE140L Lecture '
+suffix = 'pdf'
+new_name_prefix = 'CSE140 Lecture '
 for file in os.listdir('.'):
     if file[len(file) - len(suffix) : len(file)] == suffix:
-        old_name = file[:len(file) - len(suffix) - 1]
-        day = old_name[-1]
+        day = re.search(r'\d+', file).group(0)
         new_name = new_name_prefix + day + '.' + suffix
         os.rename(file, new_name)
